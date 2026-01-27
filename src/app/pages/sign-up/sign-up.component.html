@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="d-flex justify-content-center align-items-center gap-4 vh-100">
+    <div class="col-md-4 hide-mobile">
+      <div>
+        <h2 class="display-5">ToDo</h2>
+        <p class="fw-light"> TODO List App </p>
+        <p>
+          Elevate your productivity with our intuitive ToDo List App.
+          Effortlessly manage tasks, set reminders, and stay organized.
+          Experience seamless task management and never miss a deadline again.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-8 col-12">
+      <app-sign-in-form
+        [formType]="'Sign-up'"
+        [title]="'Create an Account'"
+        [buttonLabel]="'Sign up'"
+        [footerText]="'Already have an account?'"
+        [footerLinkRoute]="'/'"
+        [footerLinkText]="'Sign In'"
+      ></app-sign-in-form>
+    </div>
+  </div>
+</div>

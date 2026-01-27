@@ -1,0 +1,55 @@
+<div>
+  <app-navbar></app-navbar>
+</div>
+<div class="container mt-5">
+  <div>
+    <div class="card">
+      <p-menubar [model]="items" />
+    </div>
+  </div>
+  <div class="my-3 d-flex justify-content-end">
+    <button class="btn btn-sm btn-success" (click)="showModalDialog()"> Create Task </button>
+  </div>
+  @if (activeIndex === 0) {
+    @for (task of tasks; track task._id){
+      <div class="my-3">
+        <app-task [task]="task" (deleteTaskEvent)="taskDelete($event)" (updateTaskEvent)="taskUpdated($event)" (taskUpdateError)="taskModificationError($event)"></app-task>
+      </div>
+    }@empty {
+      <p class="text-center">There are no items.</p>
+    }
+  }
+  @if (activeIndex === 1) {
+    @for (task of pendingTasks; track task._id){
+      <div class="my-3">
+        <app-task [task]="task" (deleteTaskEvent)="taskDelete($event)" (updateTaskEvent)="taskUpdated($event)" (taskUpdateError)="taskModificationError($event)"></app-task>
+      </div>
+    }@empty {
+      <p class="text-center">There are no items.</p>
+    }
+  }
+  @if (activeIndex === 2) {
+    @for (task of inProgressTasks; track task._id){
+      <div class="my-3">
+        <app-task [task]="task" (deleteTaskEvent)="taskDelete($event)" (updateTaskEvent)="taskUpdated($event)" (taskUpdateError)="taskModificationError($event)"></app-task>
+      </div>
+    }@empty {
+      <p class="text-center">There are no items.</p>
+    }
+  }
+  @if (activeIndex === 3) {
+    @for (task of completedTasks; track task._id){
+      <div class="my-3">
+        <app-task [task]="task" (deleteTaskEvent)="taskDelete($event)" (updateTaskEvent)="taskUpdated($event)" (taskUpdateError)="taskModificationError($event)"></app-task>
+      </div>
+    }@empty {
+      <p class="text-center">There are no items.</p>
+    }
+  }
+
+
+</div>
+<p-dialog header="Task" [modal]="true" [(visible)]="isModalVisible">
+  <app-create-update-task (taskCreated)="taskCreated($event)" ></app-create-update-task>
+</p-dialog>
+<p-toast />

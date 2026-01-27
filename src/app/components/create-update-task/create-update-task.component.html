@@ -1,0 +1,26 @@
+<div>
+  <div>
+    <div class="card-body">
+      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" id="title" formControlName="title" class="form-control form-control-sm" required />
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" formControlName="description" class="form-control form-control-sm" value=""></textarea>
+        </div>
+        <div class="my-3">
+          <label for="status" class="form-label">Status</label>
+          <select id="status" formControlName="status" class="form-select form-select-sm">
+            <option value="pending">To Do</option>
+            <option value="in progress">In Progress</option>
+            <option value="completed">Done</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-success btn-sm w-100"><i class="pi pi-save"></i>Save</button>
+      </form>
+    </div>
+  </div>
+</div>
+<p-toast />

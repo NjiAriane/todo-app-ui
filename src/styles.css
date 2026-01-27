@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+/*@import "assets/styles/bootstrap-grid.css";*/
+@import "../public/assets/styles/bootstrap.css";
+@import "primeicons/primeicons.css";
+
+body {
+  font-weight: lighter;
+}
+
+@media (max-width: 760px) {
+  .hide-mobile {
+    display: none;
+    visibility: hidden;
+  }
+
+  .show-mobile {
+    display: block;
+    visibility: visible;
+  }
+}
+@media (min-width: 760px) {
+  .hide  {
+    display: none;
+    visibility: hidden;
+  }
+  .show {
+    display: block;
+    visibility: visible;
+  }
+}

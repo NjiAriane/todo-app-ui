@@ -1,0 +1,25 @@
+<div class="card rounded">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <h3 class="text-truncate">{{ task.title }}</h3>
+      <p>{{ task.status }}</p>
+    </div>
+    <div>
+      <p class="text-truncate">{{task.description}}</p>
+    </div>
+    <div class="d-flex justify-content-between">
+      <div>
+        <i class="pi pi-calendar"></i><small class="mx-2">{{task.created_at | date}}</small>
+      </div>
+      <div>
+        <button class="btn btn-sm btn-dark mx-2" (click)="showModal()"> <i class="pi pi-pencil"></i> edit</button>
+        <button class="btn btn-sm btn-danger"> <i class="pi pi-trash" (click)="deleteTask()"> delete </i></button>
+      </div>
+    </div>
+  </div>
+</div>
+<p-toast />
+<p-dialog header="Task" [modal]="true" [(visible)]="isModalVisible">
+  <app-create-update-task [task]="task" (taskUpdated)="updateTask($event)" (taskModificationError)="taskUpdateErrorEvent($event)"></app-create-update-task>
+</p-dialog>
+<p-toast />
