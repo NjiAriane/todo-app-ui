@@ -40,6 +40,5 @@ jobs:
       # Build & push frontend image
       - name: Build & push frontend image
         run: |
-          cd todo-app-ui
           docker build -t ariana1/todo-frontend:latest .
           docker push ariana1/todo-frontend:latest
