@@ -26,7 +26,6 @@ jobs:
       # Frontend tests
       - name: Frontend install & test
         run: |
-          cd todo-app-ui
           npm ci
           npm test
 
