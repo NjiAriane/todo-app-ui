@@ -1,0 +1,46 @@
+name: CI - Build, Test, Push (Dev Branch)
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # Frontend tests
+      - name: Frontend install & test
+        run: |
+          cd todo-app-ui
+          npm ci
+          npm test
+
+      # Login to Docker Hub
+      - name: Docker Hub login
+        env:
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+        run: |
+          echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+
+      # Build & push frontend image
+      - name: Build & push frontend image
+        run: |
+          cd todo-app-ui
+          docker build -t ariana1/todo-frontend:latest .
+          docker push ariana1/todo-frontend:latest
