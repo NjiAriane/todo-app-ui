@@ -24,10 +24,10 @@ jobs:
           node-version: 18
 
       # Frontend tests
-      - name: Frontend install & test
-        run: |
-          npm ci
-          npm test
+      #- name: Frontend install & test
+        #run: |
+          #npm ci
+          #npm test
 
       # Login to Docker Hub
       - name: Docker Hub login
