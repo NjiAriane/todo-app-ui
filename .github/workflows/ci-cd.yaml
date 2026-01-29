@@ -1,3 +1,5 @@
+name: CI/CD - Frontend Build, Test, Deploy (Dev Branch)
+
 on:
   push:
     branches:
@@ -42,20 +44,25 @@ jobs:
         with:
           version: v1.29.0
 
+      # Write KUBECONFIG secret to file
+      - name: Prepare Kubeconfig
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" > $HOME/kubeconfig.yaml
+          export KUBECONFIG=$HOME/kubeconfig.yaml
+          kubectl config view
+
       # Deploy to Kubernetes using the new image
       - name: Deploy to Kubernetes
-        env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
         run: |
           IMAGE_TAG=${{ github.sha }}
+          export KUBECONFIG=$HOME/kubeconfig.yaml
           kubectl set image deployment/todo-frontend todo-frontend=ariana1/todo-frontend:$IMAGE_TAG -n workload
           kubectl rollout status deployment/todo-frontend -n workload
 
       # Verify frontend deployment
       - name: Verify frontend
-        env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
         run: |
+          export KUBECONFIG=$HOME/kubeconfig.yaml
           echo "Frontend pods:"
           kubectl get pods -n workload -l app=todo-frontend
           echo "Frontend service info:"
