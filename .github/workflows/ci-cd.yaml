@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-test-deploy-frontend:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       # Checkout repository
